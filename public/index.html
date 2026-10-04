@@ -1,25 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>URL Shortener</title>
+
+  <script type="module" src="/main.js"></script>
 </head>
+
 <body>
-<nav>
+  <nav>
     <h1 class="title">Welcome to URL Shortener</h1>
   </nav>
+
   <div class="background">
     <form class="form">
-      <input class="inpt" type="text" placeholder="Enter URL" required>
-      <button class="button" type="submit">Shorten</button>
+      <input
+        class="inpt"
+        type="url"
+        placeholder="Enter URL"
+        autocomplete="url"
+        required
+      />
+
+      <button class="button" type="submit">
+        Shorten
+      </button>
     </form>
+
     <main>
-      <div class="output">
-      </div>
-      <button class="clipboard">C</button>
+      <div class="output"></div>
+
+      <button
+        class="clipboard"
+        type="button"
+        aria-label="Copy shortened URL"
+      >
+        C
+      </button>
     </main>
   </div>
+
   <div class="toast" id="toast"></div>
 </body>
 </html>

@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import path from "path";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import rateLimit from "express-rate-limit";
@@ -14,7 +15,7 @@ dotenv.config();
 
 const app = express();
 const _filename = fileURLToPath(import.meta.url)
-const _dirname = path._dirname(_filename)
+const _dirname = path.dirname(_filename)
 
 
 const Limit = rateLimit({
@@ -25,11 +26,17 @@ const Limit = rateLimit({
 })
 
 app.use(express.json({ limit: "10kb" }));
+app.use(express.static(path.resolve(_dirname, "./public")))
 app.use(cors());
 app.use(Limit)
 app.use(mongoSanitize())
 app.use(helmet())
 
+const getHtml = (_, res) => {
+    res.sendFile(path.resolve(_dirname, "./public", "index.html"))
+}
+
+app.get("/", getHtml)
 app.post("/short", Short);
 app.get("/:route", Redirect)
 
